@@ -1,4 +1,4 @@
-R: "R_LIBS_USER=~/libs/bioc310/ /usr/local/R/R-3.6.2/bin/R"
+R: "R_LIBS_USER=/hpc/users/hoffmg01/.Rlib/R_410/ /hpc/packages/minerva-centos7/R/4.1.0/lib64/R/bin/R"
 
 scripts: "scripts/"
 utils: "scripts/utils.R"
