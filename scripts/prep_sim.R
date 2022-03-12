@@ -4,10 +4,15 @@ source(file.path("scripts", "utils.R"))
 # load reference SCE
 ref <- readRDS(args$input_sce)
 
+# subset to 4 cell types
+CT = c('CD8 T cells', 'B cells', 'CD14+ Monocytes', 'CD4 T cells')
+
+ref = ref[,ref$cluster_id %in% CT]
+
 # prep. SCE for simulation w/ 'muscat::simData'
-sce <- prepSim(ref, verbose = FALSE,
+sce <- prepSim(ref, verbose = TRUE,
     # keep genes w/ count > 1 in >= 10 cells
-    min_count = 2, min_cells = 10,   
+    min_count = 1, min_cells = 10,   
     # keep cells w/ >= 100 detected genes & cluster w/ > 100 cells
     min_genes = 100, min_size = 100) 
 
