@@ -7,7 +7,7 @@ suppressMessages({
     library(UpSetR)
 })
 
-#args <- list(res = list.files("results", "kang,d[a-z][0-9]+,", full.names = TRUE))
+args <- list(res = list.files("results", "kang,d[a-z][0-9]+,", full.names = TRUE))
 res <- mutate(.read_res(args$res), 
     hit = paste(gene, cluster_id, sid, i, sep = ";"))
 
