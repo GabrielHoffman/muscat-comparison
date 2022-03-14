@@ -1,5 +1,5 @@
 # this determines which types of methods to include
-names(ids) <- ids <- c("pb", "ad", "scdd", "mast", "mm")
+names(ids) <- ids <- c("pb", "ad", "scdd", "mast", "mm", "dreamlet")
 
 # aggregation-based ------------------------------------------------------------
 pb <- dplyr::bind_rows(
@@ -10,6 +10,12 @@ pb <- dplyr::bind_rows(
         treat = c(FALSE, TRUE)
     ),
     expand.grid(
+        stringsAsFactors = FALSE,
+        assay = "counts", fun = "sum", scale = FALSE, 
+        method = c("dreamlet"),
+        treat = c(FALSE)
+    ),
+    expand.grid(
         stringsAsFactors = FALSE, scale = FALSE,
         assay = c("logcounts", "vstresiduals"),
         fun = "mean", method = "limma-trend"
@@ -18,7 +24,7 @@ pb <- dplyr::bind_rows(
         stringsAsFactors = FALSE, scale = TRUE,
         assay = "cpm", fun = "sum", method = "edgeR",
         treat = c(FALSE, TRUE)
-    )    
+    )
 )
 pb$treat[is.na(pb$treat)] <- FALSE
 pb$id <- with(pb, sprintf("%s%s.%s.%s%s", 
