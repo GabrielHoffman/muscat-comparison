@@ -15,7 +15,7 @@ wcs <- list(padj = "loc", inc = "all")
 args <- list(
     res = list.files("results", "kang,d[a-z]10,", full.names = TRUE),
     ggp = file.path("plots", "kang-perf_by_es_loc.rds"),
-    fig = file.path("plots", "kang-perf_by_es_loc.rds"))
+    fig = file.path("plots", "kang-perf_by_es_loc.pdf"))
 
 res <- .read_res(args$res) %>% 
     dplyr::mutate(E = (sim_mean.A + sim_mean.B) / 2) %>% 
