@@ -21,7 +21,7 @@ n_dd <- res %>%
 top <- group_by(res, sid, i) %>% do(
     dplyr::filter(., p_adj.loc < 0.05) %>% 
         dplyr::arrange(p_val) %>% 
-        group_by(mid, add = TRUE) %>%
+        group_by(mid, .add = TRUE) %>%
         dplyr::slice(seq_len(n_dd[.$sid[1], .$i[1]])) %>% 
         summarize(hit = list(hit))) %>% 
     group_by(mid) %>% 
