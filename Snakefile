@@ -249,19 +249,19 @@ rule plot_perf_by_es:
 		ggp={output.ggp} fig={output.fig}"\
 		{input.script} {log}'''
 
-rule plot_upset:
-	priority: 50
-	input:	config["utils"],
-			script = config["scripts"] + "plot_upset.R",
-			res = lambda wc: filter(re.compile(\
-				config["results"] + wc.did +\
-				",d[a-z][0-9]+,.*").search, res_dirs)
-	params:	res = lambda wc, input: ";".join(input.res)
-	output: fig = config["plots"] + "{did}-upset.pdf"
-	log:	config["logs"] + "plot_upset-{did}.Rout"
-	shell:	'''{R} CMD BATCH --no-restore --no-save\
-		"--args res={params.res} fig={output.fig}"\
-		{input.script} {log}'''
+# rule plot_upset:
+# 	priority: 50
+# 	input:	config["utils"],
+# 			script = config["scripts"] + "plot_upset.R",
+# 			res = lambda wc: filter(re.compile(\
+# 				config["results"] + wc.did +\
+# 				",d[a-z][0-9]+,.*").search, res_dirs)
+# 	params:	res = lambda wc, input: ";".join(input.res)
+# 	output: fig = config["plots"] + "{did}-upset.pdf"
+# 	log:	config["logs"] + "plot_upset-{did}.Rout"
+# 	shell:	'''{R} CMD BATCH --no-restore --no-save\
+# 		"--args res={params.res} fig={output.fig}"\
+# 		{input.script} {log}'''
 
 # scatter plots of estimated vs. simulated logFCs
 rule plot_lfc:
