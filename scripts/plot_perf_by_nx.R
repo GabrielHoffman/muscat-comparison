@@ -9,8 +9,12 @@ suppressMessages({
 # wcs = list(x = "c", did = "magl")
 # args <- list(
 #     res = list.files("results", sprintf("%s,de10_n%s,", wcs$did, wcs$x), full.names = TRUE),
-#     ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x))),
-#     fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x))))
+    # ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x))),
+    # fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x))))
+
+args$ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x)))
+args$fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x)))
+
 
 res <- .read_res(args$res) %>% 
     dplyr::mutate(id = sprintf(

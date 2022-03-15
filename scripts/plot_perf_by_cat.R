@@ -9,8 +9,12 @@ suppressMessages({
 # wcs <- list(padj = "loc", inc = "treat")
 # args <- list(res = list.files("results", "kang,d[a-z][0-9]+,", full.names = TRUE))
 
-args$ggp = file.path("plots", "kang-perf_by_cat_loc.rds")
-args$fig = file.path("plots", "kang-perf_by_cat_loc.pdf")
+# args$ggp = file.path("plots", "kang-perf_by_cat_loc.rds")
+# args$fig = file.path("plots", "kang-perf_by_cat_loc.pdf")
+
+wcs$x = "cat_loc"
+args$ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x)))
+args$fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x)))
 
 res <- .read_res(args$res, include = wcs$inc)
 mids <- levels(res$mid)
@@ -52,6 +56,7 @@ p <- .plot_perf_points(df, include = wcs$inc)
 p$facet$params$ncol <- nlevels(p$data$splitval)
 
 saveRDS(p, args$ggp)
+
 ggsave(args$fig, p,
     width = 15, height = 6, units = "cm",
     dpi = 300, useDingbats = FALSE)
