@@ -6,6 +6,8 @@ suppressMessages({
     library(purrr)
 })
 
+browser()
+
 groups <- c("E <= 0.1", "0.1 < E <= 0.5", "0.5 < E <= 1", "E > 1")
 .get_group <- function(u) sapply(u, function(v) 
     if (v <= 0.1) 1 else if (v <= 0.5) 2 else if (v <= 1) 3 else 4) %>% 
