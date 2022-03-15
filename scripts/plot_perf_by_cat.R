@@ -12,10 +12,10 @@ suppressMessages({
 # args$ggp = file.path("plots", "kang-perf_by_cat_loc.rds")
 # args$fig = file.path("plots", "kang-perf_by_cat_loc.pdf")
 
-wcs$x = with(wcs, paste0('cat_', padj))
+# wcs$x = with(wcs, paste0('cat_', padj))
 
-args$ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x)))
-args$fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x)))
+# args$ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x)))
+# args$fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x)))
 
 res <- .read_res(args$res, include = wcs$inc)
 mids <- levels(res$mid)

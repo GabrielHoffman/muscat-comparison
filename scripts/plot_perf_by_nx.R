@@ -12,8 +12,8 @@ suppressMessages({
     # ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x))),
     # fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x))))
 
-args$ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x)))
-args$fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x)))
+# args$ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x)))
+# args$fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x)))
 
 
 res <- .read_res(args$res) %>% 
