@@ -9,6 +9,9 @@ suppressMessages({
 # wcs <- list(padj = "loc", inc = "treat")
 # args <- list(res = list.files("results", "kang,d[a-z][0-9]+,", full.names = TRUE))
 
+args$ggp = file.path("plots", "kang-perf_by_cat_loc.rds")
+args$fig = file.path("plots", "kang-perf_by_cat_loc.pdf")
+
 res <- .read_res(args$res, include = wcs$inc)
 mids <- levels(res$mid)
 
