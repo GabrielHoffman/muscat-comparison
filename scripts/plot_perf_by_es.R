@@ -21,10 +21,10 @@ groups <- c("E <= 0.1", "0.1 < E <= 0.5", "0.5 < E <= 1", "E > 1")
 # args$ggp = file.path("plots", "kang-perf_by_es_loc.rds")
 # args$fig = file.path("plots", "kang-perf_by_es_loc.pdf")
 
-wcs$x = with(wcs, paste0('es_', padj))
+# wcs$x = with(wcs, paste0('es_', padj))
 
-args$ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x)))
-args$fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x)))
+# args$ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x)))
+# args$fig = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.pdf", wcs$x)))
 
 res <- .read_res(args$res) %>% 
     dplyr::mutate(E = (sim_mean.A + sim_mean.B) / 2) %>% 
