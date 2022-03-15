@@ -20,7 +20,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
     })[[3]]
     t2 <- system.time({
         if( pars$method == "dreamlet" ){
-            vobj <- processAssays(pb, ~ 1, verbose=FALSE)
+            vobj <- processAssays(pb, ~ 1, verbose=FALSE, min.count=3)
             fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
             tab <- topTable(fit, coef='group_idB', number=Inf)
 
