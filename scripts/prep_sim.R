@@ -5,9 +5,9 @@ source(file.path("scripts", "utils.R"))
 ref <- readRDS(args$input_sce)
 
 # subset to 4 cell types
-CT = c('CD8 T cells', 'B cells', 'CD14+ Monocytes', 'CD4 T cells')
+# CT = c('CD8 T cells', 'B cells', 'CD14+ Monocytes', 'CD4 T cells')
 
-ref = ref[,ref$cluster_id %in% CT]
+# ref = ref[,ref$cluster_id %in% CT]
 
 # prep. SCE for simulation w/ 'muscat::simData'
 sce <- prepSim(ref, verbose = TRUE,
