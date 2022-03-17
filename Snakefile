@@ -39,7 +39,7 @@ for sid in sids:
 			config["sim_data"] + "{did},{sid},{i}.rds",\
 			did = did, sid = sid, i = range(1, sim_pars["nr"][0] + 1)))
 		
-		if bool(re.match(r"d[a-z][0-9]+$", sid)) and did == "kang": 
+		if bool(re.match(r"d[a-z][0-9]+$", sid)) and did == "nps": 
 			inc_mids = mids.id
 		else:
 			inc_mids = mids.id[mids.id.str.find("treat") == -1]
@@ -71,7 +71,7 @@ rule all:
 				did = config["dids"], inc = "all",\
 				padj = ["loc", "glb"], ext = ["rds", "pdf"]),
 			expand(config["plots"] + "{did},{inc}-perf_by_cat_{padj}.{ext}",\
-				did = "kang", inc = "treat",\
+				did = "nps", inc = "treat",\
 				padj = ["loc", "glb"], ext = ["rds", "pdf"]),
 		# scatters of simulated vs. estimated logFCs
 			expand(config["plots"] + "{did}-sim_vs_est_lfc.{ext}",\
@@ -81,7 +81,7 @@ rule all:
 				did = config["dids"], x = "c", ext = ["rds", "pdf"]),
 		# TPR-FDR stratified by no. of replicates per group
 			expand(config["plots"] + "{did}-perf_by_n{x}.{ext}",\
-				did = "kang", x = "s", ext = ["rds", "pdf"]),
+				did = "nps", x = "s", ext = ["rds", "pdf"]),
 		# TPR-FDR stratified by magnitude of sample-size unbalancing
 			expand(config["plots"] + "{did}-perf_by_{x}s.{ext}",\
 				did = config["dids"], x = ["s", "g"], ext = ["rds", "pdf"]),
@@ -89,7 +89,7 @@ rule all:
 			expand(config["plots"] + "{did}-perf_by_es_{padj}.{ext}",\
 				did = config["dids"], padj = ["loc", "glb"], ext = ["rds", "pdf"]),
 		# method runtimes versus no. cells/genes
-			expand(config["plots"] + "{did}-runtimes.pdf", did = ["kang"]),
+			expand(config["plots"] + "{did}-runtimes.pdf", did = ["nps"]),
 		# run all methods on LPS dataset
 			# expand("LPS/output/DS_results_{mid}.rds",\
 			# 	mid = mids.id[mids.id.str.find("treat") == -1])
