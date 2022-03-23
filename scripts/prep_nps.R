@@ -15,3 +15,5 @@ reducedDims(sce) <- NULL # remove dimensionality reductions
 # sce$sample_id <- factor(paste0(sce$stim, sce$ind)) # construct sample IDs
 sce <- prepSCE(sce, "cluster_id", "sample_id", drop=TRUE) # prep. SCE for `muscat`
 saveRDS(sce, args$output_sce) # write SCE to .rds
+  
+  
