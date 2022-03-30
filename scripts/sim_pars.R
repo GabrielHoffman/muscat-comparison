@@ -4,12 +4,12 @@ de10 <- c(0.9, 0, 0.1, 0, 0, 0)
 
 sim_pars <- list(
     # null simulations
-    nill = list(nr = 20, p_dd = diag(6)[1, ], seed = 1), 
+    nill = list(nr = 5, p_dd = diag(6)[1, ], seed = 1), 
     # pure simulations
-    de10 = list(nr = 20, p_dd = c(0.9, 0, 0.1, 0, 0, 0), seed = 10),
-    dp10 = list(nr = 20, p_dd = c(0.9, 0, 0, 0.1, 0, 0), seed = 30),
-    dm10 = list(nr = 20, p_dd = c(0.9, 0, 0, 0, 0.1, 0), seed = 50),
-    db10 = list(nr = 20, p_dd = c(0.9, 0, 0, 0, 0, 0.1), seed = 70)
+    de10 = list(nr = 5, p_dd = c(0.9, 0, 0.1, 0, 0, 0), seed = 10),
+    dp10 = list(nr = 5, p_dd = c(0.9, 0, 0, 0.1, 0, 0), seed = 30),
+    dm10 = list(nr = 5, p_dd = c(0.9, 0, 0, 0, 0.1, 0), seed = 50),
+    db10 = list(nr = 5, p_dd = c(0.9, 0, 0, 0, 0, 0.1), seed = 70)
     # increasing number of genes, cells, replicates
     # de10_ng = list(nr = 5, nk = 2, ns = 3, seed = 80, nc = 2*2*3*100),
     # de10_nc = list(nr = 5, nk = 2, ns = 3, seed = 90, nc = 2*2*3*500),
