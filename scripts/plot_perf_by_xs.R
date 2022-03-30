@@ -11,6 +11,7 @@ suppressMessages({
 
 res <- .read_res(args$res) %>% 
     dplyr::mutate(E = (sim_mean.A + sim_mean.B) / 2) %>% 
+    dplyr::mutate(p_val = pmin(p_val, 1)) %>%
     dplyr::filter(E > 0.1) %>% setDT %>% 
     split(by = c("sid", "i", "mid"), flatten = FALSE)
 

@@ -21,6 +21,7 @@ res <- .read_res(args$res) %>%
         "i%sj%sc%ss%s%s%s", 
         i, j, c, s, gene, cluster_id)) %>% 
     dplyr::mutate(E = (sim_mean.A + sim_mean.B) / 2) %>% 
+    dplyr::mutate(p_val = pmin(p_val, 1)) %>%
     dplyr::filter(E > 0.1) %>% setDT %>% 
     split(by = "i", flatten = FALSE) %>% 
     map(group_by, mid) %>% map(function(u) 
