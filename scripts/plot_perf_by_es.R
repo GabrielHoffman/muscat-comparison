@@ -28,6 +28,7 @@ groups <- c("E <= 0.1", "0.1 < E <= 0.5", "0.5 < E <= 1", "E > 1")
 
 res <- .read_res(args$res) %>% 
     dplyr::mutate(E = (sim_mean.A + sim_mean.B) / 2) %>% 
+    mutate( p_val = pmin(1, p_val)) %>%
     dplyr::mutate(group = .get_group(.$E)) %>% setDT %>% 
     split(by = c("sid", "i", "group", "mid"), flatten = FALSE)
 
