@@ -10,9 +10,9 @@ run_pars <- list(
         de10_ns = list(nr = 1, ns = c(2, 3, 4, 5))
     ),
     nps = list(
-        de10_ng = list(nr = 1, ng = c(5e3, 9e3)), # , 
-        de10_nc = list(nr = 1, nc = c(50, 100, 400)), # , 200, 400
-        de10_ns = list(nr = 1, ns = c(5, 10, 20))
+        de10_ng = list(nr = 1, ng = c(5e3)), # , 
+        de10_nc = list(nr = 1, nc = c(50, 400)), # , 200, 400
+        de10_ns = list(nr = 1, ns = c(5, 10))
     )
 )
 
