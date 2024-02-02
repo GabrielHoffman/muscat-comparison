@@ -15,7 +15,7 @@ names(.cat_cols) <- c("ee", "ep", "de", "dp", "dm", "db")
     "limma-trend.mean.logcounts"    = "#45BF55",
     "limma-trend.mean.vstresiduals" = "#B5E655",
     
-    "MAST.logcounts"    = "#FFC300",
+    "MAST.logcounts"    = "#FFC300"
     
     #"MM-dream"  = "#005E5C",
     #"MM-dream2" = "#00ABA6",
