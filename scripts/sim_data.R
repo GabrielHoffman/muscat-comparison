@@ -14,6 +14,7 @@ set.seed(sim_pars$seed + as.numeric(wcs$i))
 
 sim <- simData(sce, 
     paired = FALSE, lfc = 2,
+    force = TRUE,
     ng = nrow(sce), nc = sim_pars$nc,
     ns = sim_pars$ns, nk = sim_pars$nk,
     p_dd = sim_pars$p_dd, probs = sim_pars$probs)
