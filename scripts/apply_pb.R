@@ -47,7 +47,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                 tab2$p_adj.loc[idx] = p.adjust(tab2$p_val[idx], "BH")
             }
 
-            res = tab2  ∂
+            res = tab2  
         }else{
 
             res <- tryCatch(
