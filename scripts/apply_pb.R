@@ -32,6 +32,10 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                             verbose=FALSE, 
                             weightsList = W.list,
                             scaledByLib = FALSE, 
+                            min.cells = 0,
+                            min.count = 0,
+                            min.samples = 0,
+                            min.prop = 0,
                             prior.count = .5)
 
             fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
