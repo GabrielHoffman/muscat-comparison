@@ -24,14 +24,13 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
             pb <- aggregateToPseudoBulk(sce, a, cluster_id = "cluster_id", sample_id = "sample_id", fun = pars$fun, scale = pars$scale)
 
             # Gene expressed genes for each cell type
-            geneList = getExprGeneNames(pb, min.cells=10)
+            geneList = getExprGeneNames(pb)
 
             W.list = get_weights(sce, pars, geneList)
 
             vobj <- processAssays(pb, ~ group_id, 
                             verbose=FALSE, 
                             weightsList = W.list, 
-                            min.cells=10, 
                             prior.count = .5)
 
             fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
@@ -57,6 +56,14 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                 error = function(e) e)
             if (!inherits(res, "error"))
                 res <- dplyr::bind_rows(res$table[[1]])
+
+            # get same gene list as above
+            pb <- aggregateToPseudoBulk(sce, "counts", cluster_id = "cluster_id", sample_id = "sample_id")
+            geneList = getExprGeneNames(pb)
+            gs = unlist(sapply(names(geneList), function(x) 
+                paste(x, geneList[[x]])))
+            keep = with(res, paste(cluster_id, gene) %in% gs)
+            res[keep,]
         }
     })[[3]]
     list(rt = c(t1, t2), tbl = res)
