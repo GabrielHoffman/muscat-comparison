@@ -19,13 +19,70 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
         pb <- aggregateData(sce, a, fun = pars$fun, scale = pars$scale)
     })[[3]]
     t2 <- system.time({
-        res <- tryCatch(
-            do.call(pbDS, c(
-                list(pb = pb, filter = "none", verbose = FALSE),
-                pars[names(pars) %in% names(formals(pbDS))])),
-            error = function(e) e)
-        if (!inherits(res, "error"))
-            res <- dplyr::bind_rows(res$table[[1]])
+        if( pars$method %in% c("dreamlet_delta", "dreamlet_ncells", "dreamlet_none") ){
+
+            pb <- aggregateToPseudoBulk(sce, a, cluster_id = "cluster_id", sample_id = "sample_id", fun = pars$fun, scale = pars$scale)
+
+            # Gene expressed genes for each cell type
+            geneList = getExprGeneNames(pb, min.cells=10)
+
+            W.list = get_weights(sce, geneList)
+
+            vobj <- processAssays(pb, ~ group_id, 
+                            verbose=FALSE, 
+                            weightsList = W.list, 
+                            min.cells=10, 
+                            prior.count = .5)
+
+            fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
+            tab <- topTable(fit, coef='group_idB', number=Inf, sort.by="none")
+
+            tab2 = with(tab, data.frame(gene = ID, cluster_id = assay, logFC, AveExpr, t, p_val=P.Value, B, contrast='B'))
+
+            tab2$p_adj.glb = p.adjust(tab2$p_val, "BH")
+            tab2$p_adj.loc = rep(NA, nrow(tab2))
+
+            for( CT in unique(tab2$cluster_id) ){
+                idx = which(tab2$cluster_id==CT)
+                tab2$p_adj.loc[idx] = p.adjust(tab2$p_val[idx], "BH")
+            }
+
+            res = tab2  ∂
+        }else{
+
+            res <- tryCatch(
+                do.call(pbDS, c(
+                    list(pb = pb, filter = "none", verbose = FALSE),
+                    pars[names(pars) %in% names(formals(pbDS))])),
+                error = function(e) e)
+            if (!inherits(res, "error"))
+                res <- dplyr::bind_rows(res$table[[1]])
+        }
     })[[3]]
     list(rt = c(t1, t2), tbl = res)
+}
+
+
+get_weights = function(sce, geneList){
+     # Precision weights
+    pc = 0.5
+    W.list <- switch(pars$method, 
+            "dreamlet_delta" = pbWeights( sce, 
+                            sample_id = "sample_id", 
+                            cluster_id = "cluster_id", 
+                            method = "delta", 
+                            geneList = geneList,
+                            prior.count = pc), 
+            "dreamlet_ncells" = pbWeights( sce, 
+                            sample_id = "sample_id", 
+                            cluster_id = "cluster_id", 
+                            method = "ncells", 
+                            geneList = geneList), 
+            "dreamlet_none" = {w = pbWeights( sce, 
+                            sample_id = "sample_id", 
+                            cluster_id = "cluster_id", 
+                            method = "ncells", 
+                            geneList = geneList);
+                lapply(w, function(x){x[] = 1; x})})
+    W.list
 }

@@ -5,17 +5,21 @@
 names(.cat_cols) <- c("ee", "ep", "de", "dp", "dm", "db")
 
 .meth_cols <- c(
+    "dreamlet_delta.sum.counts" = "#E41A1C",
+    "dreamlet_ncells.sum.counts" = "#f76b5c",
+    "dreamlet_none.sum.counts" = "#d1696a",
+
+    "limma-voom.sum.counts" = "#377EB8",
+    "limma-trend.mean.logcounts"    = "#95bcdb",
+    "limma-trend.mean.vstresiduals" = "#cfeaff",
+
+    "DESeq2.sum.counts" = "#984EA3",
+
     "edgeR.sum.counts" = "#4DAF4A",
     "edgeR.sum.scalecpm" = "#9cf099",
     
     #"scDD.logcounts"    = "#0056B2",
-    #"scDD.vstresiduals" = "#009EF6", 
-    
-    "limma-voom.sum.counts" = "#377EB8",
-    "limma-trend.mean.logcounts"    = "#95bcdb",
-    "limma-trend.mean.vstresiduals" = "#cfeaff",
-    
-    "DESeq2.sum.counts" = "#984EA3", 
+    #"scDD.vstresiduals" = "#009EF6",  
 
     "MAST.logcounts"    = "#ed68b8"    
     #"MM-dream"  = "#005E5C",
