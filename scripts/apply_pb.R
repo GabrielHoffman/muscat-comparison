@@ -30,7 +30,8 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             vobj <- processAssays(pb, ~ group_id, 
                             verbose=FALSE, 
-                            weightsList = W.list, 
+                            weightsList = W.list,
+                            scaledByLib = FALSE, 
                             prior.count = .5)
 
             fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
