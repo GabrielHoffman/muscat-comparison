@@ -32,10 +32,6 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                             verbose=FALSE, 
                             weightsList = W.list,
                             scaledByLib = FALSE, 
-                            min.cells = 0,
-                            min.count = 0,
-                            min.samples = 0,
-                            min.prop = 0,
                             prior.count = .5)
 
             fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
@@ -56,15 +52,16 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             res <- tryCatch(
                 do.call(pbDS, c(
-                    list(pb = pb, filter = "none", verbose = FALSE),
+                    list(pb = pb, filter = "genes", verbose = FALSE),
                     pars[names(pars) %in% names(formals(pbDS))])),
                 error = function(e) e)
             if (!inherits(res, "error"))
                 res <- dplyr::bind_rows(res$table[[1]])
 
             # get same gene list as above
-            pb <- aggregateToPseudoBulk(sce, "counts", cluster_id = "cluster_id", sample_id = "sample_id")
-            geneList = getExprGeneNames(pb)
+            pb.tmp <- aggregateToPseudoBulk(sce, "counts", cluster_id = "cluster_id", sample_id = "sample_id")
+            geneList = getExprGeneNames(pb.tmp)
+            
             gs = unlist(sapply(names(geneList), function(x) 
                 paste(x, geneList[[x]])))
             keep = with(res, paste(cluster_id, gene) %in% gs)
