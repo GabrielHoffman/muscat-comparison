@@ -3,7 +3,7 @@ R: "R_LIBS_USER=/hpc/users/hoffmg01/.Rlib/R_430 /hpc/packages/minerva-centos7/R/
 scripts: "scripts/"
 utils: "scripts/utils.R"
 
-dids: ["kang", "pad"]
+dids: ["kang"]
 sids: "meta/sim_ids.json"
 mids: "meta/meth_ids.csv"
 
