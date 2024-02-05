@@ -26,7 +26,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
             # Gene expressed genes for each cell type
             geneList = getExprGeneNames(pb, min.cells=10)
 
-            W.list = get_weights(sce, geneList)
+            W.list = get_weights(sce, pars, geneList)
 
             vobj <- processAssays(pb, ~ group_id, 
                             verbose=FALSE, 
@@ -63,7 +63,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 }
 
 
-get_weights = function(sce, geneList){
+get_weights = function(sce, pars, geneList){
      # Precision weights
     pc = 0.5
     W.list <- switch(pars$method, 
