@@ -3,6 +3,7 @@ suppressMessages({
     library(muscat)
     library(scater)
     library(sctransform)
+    library(dreamlet)
     library(SingleCellExperiment)
 })
 

@@ -5,18 +5,19 @@
 names(.cat_cols) <- c("ee", "ep", "de", "dp", "dm", "db")
 
 .meth_cols <- c(
-    "edgeR.sum.counts" = "#000000",
-    "edgeR.sum.scalecpm" = "#C6C6C6",
+    "edgeR.sum.counts" = "#4DAF4A",
+    "edgeR.sum.scalecpm" = "#9cf099",
     
     #"scDD.logcounts"    = "#0056B2",
     #"scDD.vstresiduals" = "#009EF6", 
     
-    "limma-voom.sum.counts" = "#009262",
-    "limma-trend.mean.logcounts"    = "#45BF55",
-    "limma-trend.mean.vstresiduals" = "#B5E655",
+    "limma-voom.sum.counts" = "#377EB8",
+    "limma-trend.mean.logcounts"    = "#95bcdb",
+    "limma-trend.mean.vstresiduals" = "#cfeaff",
     
-    "MAST.logcounts"    = "#FFC300"
-    
+    "DESeq2.sum.counts" = "#984EA3", 
+
+    "MAST.logcounts"    = "#ed68b8"    
     #"MM-dream"  = "#005E5C",
     #"MM-dream2" = "#00ABA6",
     #"MM-nbinom" = "#00E3DD",

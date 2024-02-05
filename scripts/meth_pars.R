@@ -14,6 +14,11 @@ pb <- dplyr::bind_rows(
         treat = c(FALSE, TRUE)
     ),
     expand.grid(
+        stringsAsFactors = FALSE,
+        assay = "counts", fun = "sum", scale = FALSE, 
+        method = c("DESeq2"), #c("dreamlet_delta", "dreamlet_ncells", "dreamlet_none", "DESeq2"),
+        treat = c(FALSE)),
+    expand.grid(
         stringsAsFactors = FALSE, scale = FALSE,
         assay = c("logcounts", "vstresiduals"),
         fun = "mean", method = "limma-trend"
