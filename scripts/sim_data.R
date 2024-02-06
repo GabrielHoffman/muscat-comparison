@@ -16,6 +16,9 @@ set.seed(sim_pars$seed + as.numeric(wcs$i))
 # Then downsample later
 k_scaling = 2
 
+assignInNamespace( ".check_args_simData", function(u)
+    return(list(nk = u$nk, ns = u$ns)), ns="muscat")
+
 sim <- simData(sce, 
     paired = FALSE, lfc = .5 ,
     force = TRUE,
