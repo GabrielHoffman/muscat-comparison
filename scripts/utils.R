@@ -11,26 +11,12 @@ names(.cat_cols) <- c("ee", "ep", "de", "dp", "dm", "db")
 
     "limma-voom.sum.counts" = "#377EB8",
     "limma-trend.mean.logcounts"    = "#95bcdb",
-    "limma-trend.mean.vstresiduals" = "#cfeaff",
+    # "limma-trend.mean.vstresiduals" = "#cfeaff",
 
     "DESeq2.sum.counts" = "#984EA3",
-
     "edgeR.sum.counts" = "#4DAF4A",
     "edgeR.sum.scalecpm" = "#9cf099",
-    
-    #"scDD.logcounts"    = "#0056B2",
-    #"scDD.vstresiduals" = "#009EF6",  
-
     "MAST.logcounts"    = "#ed68b8"    
-    #"MM-dream"  = "#005E5C",
-    #"MM-dream2" = "#00ABA6",
-    #"MM-nbinom" = "#00E3DD",
-    #"MM-vst"    = "#95EEE8",
-    
-    #"AD-gid.logcounts"    = "#9A41B3",
-    #"AD-gid.vstresiduals" = "#FFA9FF",
-    #"AD-sid.logcounts"    = "#E56D4B",
-    #"AD-sid.vstresiduals" = "#FBB6A2"
     )
 
 #cols <- .meth_cols

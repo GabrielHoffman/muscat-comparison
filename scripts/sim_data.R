@@ -84,7 +84,7 @@ sim <- computeLibraryFactors(sim)
 sim <- logNormCounts(sim)
 assays(sim)$cpm <- calculateCPM(sim)
 
-vst_values <- suppressWarnings(sctransform::vst(counts(sim2))$y)
-assays(sim)$vstresiduals <- vst_values
+# vst_values <- suppressWarnings(sctransform::vst(counts(sim))$y)
+# assays(sim)$vstresiduals <- vst_values
 
 saveRDS(sim, args$sim)
