@@ -2,6 +2,7 @@ suppressMessages({
     library(data.table)
     library(dplyr)
     library(iCOBRA)
+    library(tidyverse)
     library(ggplot2)
     library(purrr)
 })
@@ -86,7 +87,7 @@ ggsave(args$fig, p,
 library(tidyverse)
 
 thresholds = c(1e-18, 1e-15, 1e-12, 1e-10, 1e-8, 1e-6, 1e-4, 1e-3)
-thresholds = sort(c(thresholds, seq(5e-3, 1, length.out=500)))
+thresholds = sort(c(thresholds, seq(5e-3, 1, length.out=100 )))
 
 perf2 <- lapply(cd, calculate_performance, 
     aspects = "fdrtpr", binary_truth = "is_de", 
@@ -108,24 +109,30 @@ df <- map(perf2, "fdrtpr") %>%
     }) %>% 
     group_by(splitval, thr, method) %>% 
     summarise_at(c("FDR", "TPR", "Precision", "Recall", "F1"), mean) %>% 
-    mutate_at("method", factor, levels = names(.meth_cols))
+    mutate_at("method", factor, levels = names(.meth_cols)) %>%
+        group_by(splitval, method) %>% 
+        group_modify(~ add_row(.x, thr=0, FDR=0, TPR=0, Precision=1, Recall=0, F1=0, .before=0))
+
+
 
 plot_PR = function(df,
     include = "all", color_by = "method", facet = "splitval") {
-    df <- filter(ungroup(df), TPR + FDR != 0)
+    # df <- filter(ungroup(df), TPR + FDR != 0)
     df$treat <- grepl("treat", df$method)
     if (any(rmv <- table(df$splitval) < 2))
         df <- filter(df, !splitval %in% levels(df$splitval)[rmv])
     df$method <- factor(
         gsub("-treat", "", df$method),
         levels = levels(df$method))
-    p <- ggplot(filter(df, FDR + TPR != 0),
+    p <- df %>%
+        # filter(FDR + TPR != 0) %>%
+        ggplot(
         aes_string(x = "Recall", y = "Precision", col = color_by)) +
         facet_wrap(facet, labeller = labeller(.multi_line = FALSE), nrow=1) +
         # geom_vline(size = 0.2, lty = 2, aes(xintercept = thr)) +
         # geom_point(size = 1, alpha = 0.8) +
         geom_line(aes(lty = treat), size = 1, alpha = 0.7, show.legend = (include == "treat")) +
-        scale_color_manual(NULL, values = switch(include, treat = .treat_cols, .meth_cols)) +
+        # scale_color_manual(NULL, values = switch(include, treat = .treat_cols, .meth_cols)) +
         scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2), expand = c(0, 0.05)) +
         scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2), expand = c(0, 0.05)) +
         .prettify(theme = "bw", legend.position = "bottom", legend.box.just = "center") +
@@ -139,6 +146,8 @@ plot_PR = function(df,
 
 
 p <- plot_PR(df)
+
+
 
 file = gsub("\\.pdf", "\\_PR.pdf", args$fig)
 
@@ -156,7 +165,7 @@ df_aupr = df %>%
     mutate(Precision = replace_na(Precision, 1)) %>%
     select(splitval, method, Precision, Recall) %>%
     group_by(splitval, method) %>%
-    select(-thr) %>% 
+    # select(-thr) %>% 
     unique %>%
     summarize(AUPR = AUC(Recall, Precision))
 
