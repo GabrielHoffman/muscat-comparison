@@ -13,7 +13,7 @@ sim_pars <- fromJSON(args$sim_pars)
 set.seed(sim_pars$seed + as.numeric(wcs$i))
 
 sim <- simData(sce, 
-    paired = FALSE, lfc = 2,
+    paired = FALSE, lfc = 1,
     force = TRUE,
     ng = nrow(sce), nc = sim_pars$nc,
     ns = sim_pars$ns, nk = sim_pars$nk,
