@@ -83,7 +83,8 @@ metadata(sim)$gene_info <- gi
 sim <- computeLibraryFactors(sim)
 sim <- logNormCounts(sim)
 assays(sim)$cpm <- calculateCPM(sim)
-assays(sim)$vstresiduals <- suppressWarnings(
-    vst(counts(sim), show_progress = FALSE)$y)
+
+vst_values <- suppressWarnings(sctransform::vst(counts(sim2))$y)
+assays(sim)$vstresiduals <- vst_values
 
 saveRDS(sim, args$sim)
