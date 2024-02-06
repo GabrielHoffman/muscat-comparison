@@ -19,8 +19,53 @@ k_scaling = 2
 assignInNamespace( ".check_args_simData", function(u)
     return(list(nk = u$nk, ns = u$ns)), ns="muscat")
 
+
+# simulate effect size heterogeneity
+# with a normal offset added to the logFC 
+.nb.replace <- function(cs, d, m, lfc = NULL, f = 1) {
+    n_gs <- length(d)
+    n_cs <- length(cs)
+    if (is.null(lfc)) {
+        lfc <- rep(0, n_gs)
+    } else {
+        lfc[lfc < 0] <- 0
+    }
+    names(lfc) = names(d)
+
+    # effect size heterogeneity for non-zero effects
+    if( any(lfc != 0) ){
+        i = lfc != 0
+        lfc[i] <- lfc[i] + rnorm(length(lfc[i]), 0, .1) 
+        # lfc[lfc < 0] <- 0
+    }
+
+    fc <- f * (2 ^ lfc)
+    # cat fcs for all cells
+    fc <- rep(fc, each = n_cs)
+
+    # cell-level heterogeneity when fc != 1
+    # i.e. lfc != 0
+    i = (fc != 1)
+    s = sqrt(rgamma(1,1, 1000))
+    fc[i] = 2^(log2(fc[i]) + rnorm(sum(i), 0, s))
+    fc = pmax(1, fc)
+    # plot(log(fc))
+
+    ds <- rep(1/d, each = n_cs)
+    ms <- c(t(m[, cs])) * fc 
+    y <- rnbinom(n_gs * n_cs, size = ds, mu = ms)
+    y <- matrix(y, byrow = TRUE, 
+        nrow = n_gs, ncol = n_cs, 
+        dimnames = list(names(d), cs))
+    ms <- split(ms, rep(seq_len(nrow(m)), each = n_cs))
+    list(counts = y, means = ms)
+}
+
+assignInNamespace(".nb", .nb.replace, ns="muscat")
+
+
 sim <- simData(sce, 
-    paired = FALSE, lfc = .5 ,
+    paired = FALSE, lfc = .3 ,
     force = TRUE,
     ng = nrow(sce), nc = sim_pars$nc * k_scaling,
     ns = sim_pars$ns, nk = sim_pars$nk,

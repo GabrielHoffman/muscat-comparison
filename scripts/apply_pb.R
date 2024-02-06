@@ -39,7 +39,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                         min.samples = 0,
                         min.prop = 0,
                         min.total.count = 1,
-                        span = 0.5,
+                        # span = 0.5,
                         weightsList = W.list)
 
             fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
