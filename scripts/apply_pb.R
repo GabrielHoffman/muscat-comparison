@@ -25,20 +25,20 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             # Gene expressed genes for each cell type
             geneList = getExprGeneNames(pb,
-                        min.cells = 10,
+                        min.cells = 1,
                         min.count = 0,
                         min.samples = 0,
                         min.prop = 0,
-                        min.total.count = 15)
+                        min.total.count = 1)
 
             W.list = get_weights(sce, pars, geneList)
 
             vobj <- processAssays(pb, ~ group_id,
-                        min.cells = 10,
+                        min.cells = 1,
                         min.count = 0,
                         min.samples = 0,
                         min.prop = 0,
-                        min.total.count = 15,
+                        min.total.count = 1,
                         span = 0.5,
                         weightsList = W.list)
 
@@ -69,11 +69,11 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
             # get same gene list as above
             pb.tmp <- aggregateToPseudoBulk(sce, "counts", cluster_id = "cluster_id", sample_id = "sample_id")
             geneList = getExprGeneNames(pb.tmp,
-                        min.cells = 10,
+                        min.cells = 1,
                         min.count = 0,
                         min.samples = 0,
                         min.prop = 0,
-                        min.total.count = 15)
+                        min.total.count = 1)
 
             gs = unlist(sapply(names(geneList), function(x) 
                 paste(x, geneList[[x]])))

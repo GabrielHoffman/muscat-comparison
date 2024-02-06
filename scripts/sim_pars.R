@@ -13,7 +13,7 @@ sim_pars <- list(
     # increasing number of genes, cells, replicates
     de10_ng = list(nr = 5, nk = 2, ns = 3, seed = 80, nc = 2*2*3*100),
     de10_nc = list(nr = 5, nk = 2, ns = 3, seed = 90, nc = 2*2*3*500),
-    de10_ns = list(nr = 5, nk = 2, ns = 25, seed = 110)
+    de10_ns = list(nr = 5, nk = 2, ns = 30, seed = 110)
 )
 
 # unbalanced sample sizes 
@@ -46,7 +46,7 @@ for (i in seq_along(gs)) {
         p_dd = de10, probs = list(NULL, NULL, gs[[i]]))
 }
   
-def_pars <- list(nr = 1, nk = 3, ns = 3, 
+def_pars <- list(nr = 1, nk = 3, ns = 30, 
     ng = 4e3, nc = function(nk, ns) 2*nk*ns*200, 
     p_dd = de10, probs = NULL, seed = 1)
 
