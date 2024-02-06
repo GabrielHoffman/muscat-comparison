@@ -26,7 +26,9 @@ sim <- simData(sce,
 # filter genes
 sim <- sim[rowSums(counts(sim) > 0) >= 10, ]
 
-if( k_scaling => 1){
+tab = table(sim$sample_id, sim$cluster_id)
+
+if( k_scaling > 1){
 
     df_grid = expand.grid(sid = levels(sim$sample_id), 
                             cid = levels(sim$cluster_id))

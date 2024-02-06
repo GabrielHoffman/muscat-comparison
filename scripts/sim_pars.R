@@ -11,8 +11,8 @@ sim_pars <- list(
     dm10 = list(nr = 5, p_dd = c(0.9, 0, 0, 0, 0.1, 0), seed = 50),
     db10 = list(nr = 5, p_dd = c(0.9, 0, 0, 0, 0, 0.1), seed = 70),
     # increasing number of genes, cells, replicates
-    de10_ng = list(nr = 5, nk = 2, ns = 3, seed = 80, nc = 2*2*3*100),
-    de10_nc = list(nr = 5, nk = 2, ns = 3, seed = 90, nc = 2*2*3*500),
+    de10_ng = list(nr = 5, nk = 2, ns = 30, seed = 80, nc = 2*2*30*100),
+    de10_nc = list(nr = 5, nk = 2, ns = 30, seed = 90, nc = 2*2*30*500),
     de10_ns = list(nr = 5, nk = 2, ns = 30, seed = 110)
 )
 
@@ -31,7 +31,8 @@ for (i in seq_along(ss)) {
         nk = gs_nk, ns = ss_ns, 
         p_dd = de10, probs = list(NULL, ss[[i]], NULL))
 }
-# unbalanced group sizes -------------------------------------------------------
+
+# unbalanced group sizes # -------------------------------------------------------
 gs_nk <- 2; 
 gs_ns <- 20; 
 gs_nc <- 200
