@@ -21,18 +21,26 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
     t2 <- system.time({
         if( pars$method %in% c("dreamlet_delta", "dreamlet_ncells", "dreamlet_none") ){
 
-            pb <- aggregateToPseudoBulk(sce, a, cluster_id = "cluster_id", sample_id = "sample_id", fun = pars$fun, scale = pars$scale)
+            pb <- aggregateToPseudoBulk(sce, a, cluster_id = "cluster_id", sample_id = "sample_id")#, fun = pars$fun, scale = pars$scale)
 
             # Gene expressed genes for each cell type
-            geneList = getExprGeneNames(pb)
+            geneList = getExprGeneNames(pb,
+                        min.cells = 10,
+                        min.count = 0,
+                        min.samples = 0,
+                        min.prop = 0,
+                        min.total.count = 15)
 
             W.list = get_weights(sce, pars, geneList)
 
-            vobj <- processAssays(pb, ~ group_id, 
-                            verbose=FALSE, 
-                            weightsList = W.list,
-                            scaledByLib = FALSE, 
-                            prior.count = .5)
+            vobj <- processAssays(pb, ~ group_id,
+                        min.cells = 10,
+                        min.count = 0,
+                        min.samples = 0,
+                        min.prop = 0,
+                        min.total.count = 15,
+                        span = 0.5,
+                        weightsList = W.list)
 
             fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
             tab <- topTable(fit, coef='group_idB', number=Inf, sort.by="none")
@@ -52,7 +60,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             res <- tryCatch(
                 do.call(pbDS, c(
-                    list(pb = pb, filter = "genes", verbose = FALSE),
+                    list(pb = pb, filter = "none", verbose = FALSE),
                     pars[names(pars) %in% names(formals(pbDS))])),
                 error = function(e) e)
             if (!inherits(res, "error"))
@@ -61,7 +69,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
             # get same gene list as above
             pb.tmp <- aggregateToPseudoBulk(sce, "counts", cluster_id = "cluster_id", sample_id = "sample_id")
             geneList = getExprGeneNames(pb.tmp)
-            
+
             gs = unlist(sapply(names(geneList), function(x) 
                 paste(x, geneList[[x]])))
             keep = with(res, paste(cluster_id, gene) %in% gs)
