@@ -20,7 +20,7 @@ pb <- dplyr::bind_rows(
         treat = c(FALSE)),
     expand.grid(
         stringsAsFactors = FALSE, scale = FALSE,
-        assay = c("logcounts", "vstresiduals"),
+        assay = c("logcounts"), #, "vstresiduals"
         fun = "mean", method = "limma-trend"
     ),
     data.frame(
