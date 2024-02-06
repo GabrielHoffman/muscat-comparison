@@ -68,7 +68,12 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             # get same gene list as above
             pb.tmp <- aggregateToPseudoBulk(sce, "counts", cluster_id = "cluster_id", sample_id = "sample_id")
-            geneList = getExprGeneNames(pb.tmp)
+            geneList = getExprGeneNames(pb.tmp,
+                        min.cells = 10,
+                        min.count = 0,
+                        min.samples = 0,
+                        min.prop = 0,
+                        min.total.count = 15)
 
             gs = unlist(sapply(names(geneList), function(x) 
                 paste(x, geneList[[x]])))
