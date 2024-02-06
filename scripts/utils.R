@@ -11,12 +11,12 @@ names(.cat_cols) <- c("ee", "ep", "de", "dp", "dm", "db")
 
     "limma-voom.sum.counts" = "#377EB8",
     "limma-trend.mean.logcounts"    = "#95bcdb",
-    # "limma-trend.mean.vstresiduals" = "#cfeaff",
+    "limma-trend.mean.vstresiduals" = "#cfeaff",
 
     "DESeq2.sum.counts" = "#984EA3",
     "edgeR.sum.counts" = "#4DAF4A",
-    "edgeR.sum.scalecpm" = "#9cf099"#,
-    # "MAST.logcounts"    = "#ed68b8"    
+    "edgeR.sum.scalecpm" = "#9cf099",
+    "MAST.logcounts"    = "#ed68b8"    
     )
 
 #cols <- .meth_cols
