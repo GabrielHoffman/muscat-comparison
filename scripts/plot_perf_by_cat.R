@@ -18,13 +18,20 @@ res <- res %>%
     split(by = c("i", "sid", "mid"), flatten = FALSE)
 
 p_adj <- paste0("p_adj.", wcs$padj)
-cd <- lapply(seq_along(res), function(i) COBRAData( 
-    pval = as.data.frame(bind_rows(map(map_depth(res[[i]], 2, "p_val"), bind_cols))),
+cd <- lapply(seq_along(res), function(i){
+    df_p = as.data.frame(bind_rows(map(map_depth(res[[i]], 2, "p_val"), bind_cols)))
+    df_p = as.matrix(df_p)
+    chg = which(df_p > 1.0)
+    if( length(chg) > 0) df_p[chg] = 1
+
+    COBRAData( 
+    pval = as.data.frame(df_p),
     padj = as.data.frame(bind_rows(map(map_depth(res[[i]], 2, p_adj), bind_cols))),
     truth = data.frame(
         row.names = NULL,
         sim_id = unlist(map(map_depth(res[[i]], 2, "sid"), 1)),
-        is_de = unlist(map(map_depth(res[[i]], 2, "is_de"), 1)))))
+        is_de = unlist(map(map_depth(res[[i]], 2, "is_de"), 1))))
+    })
 
 perf <- lapply(cd, calculate_performance, 
     aspects = "fdrtpr", binary_truth = "is_de", 
