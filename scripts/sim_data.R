@@ -32,12 +32,14 @@ assignInNamespace( ".check_args_simData", function(u)
     }
     names(lfc) = names(d)
 
-    # effect size heterogeneity for non-zero effects
-    if( any(lfc != 0) ){
-        i = lfc != 0
-        lfc[i] <- lfc[i] + rnorm(length(lfc[i]), 0, .2) 
-        lfc[lfc < 0] <- 0
-    }
+    # add expression heterogeneity to NB means
+    rv_factor <- 2 # 0 is no additional heterogeneity
+    minValue <- min(m)
+    M = apply(m, 1, function(x){
+        x <- x + rv_factor*rnorm(length(x), 0, sd(x))
+        pmax(x, minValue)
+        })
+    m <- m + t(M)
 
     fc <- f * (2 ^ lfc)
     # cat fcs for all cells
