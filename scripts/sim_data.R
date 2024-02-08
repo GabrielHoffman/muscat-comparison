@@ -32,10 +32,10 @@ assignInNamespace( ".check_args_simData", function(u)
     }
     names(lfc) = names(d)
 
-    # add expression heterogeneity to NB means
-    rv_factor <- 2e4 # 0 is no additional heterogeneity
+    # add expression heterogeneity to NB 
     minValue <- min(m)
     M = apply(m, 1, function(x){
+        rv_factor <- runif(1, 1, 1e6) # 0 is no additional 
         x <- x + rv_factor*rnorm(length(x), 0, sd(x))
         pmax(x, minValue)
         })
