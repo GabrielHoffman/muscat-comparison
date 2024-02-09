@@ -25,7 +25,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             # filtering done before, for consistency
             vobj <- processAssays(pb, 
-                        ~ group_id 
+                        ~ group_id, 
                         min.cells = 1,
                         min.count = 0,
                         min.samples = 0,
