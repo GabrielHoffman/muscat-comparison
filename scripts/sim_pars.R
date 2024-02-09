@@ -13,15 +13,15 @@ sim_pars <- list(
     dm10 = list(nr = nr, p_dd = c(0.9, 0, 0, 0, 0.1, 0), seed = 50),
     db10 = list(nr = nr, p_dd = c(0.9, 0, 0, 0, 0, 0.1), seed = 70),
     # increasing number of genes, cells, replicates
-    de10_ng = list(nr = nr, nk = 2, ns = 30, seed = 80, nc = 2*2*30*100),
-    de10_nc = list(nr = nr, nk = 2, ns = 30, seed = 90, nc = 2*2*30*500),
+    de10_ng = list(nr = nr, nk = 2, ns = 50, seed = 80, nc = 2*2*50*100),
+    de10_nc = list(nr = nr, nk = 2, ns = 50, seed = 90, nc = 2*2*50*500),
     de10_ns = list(nr = nr, nk = 2, ns = 100, seed = 110)
 )
 
 # unbalanced sample sizes 
 # ------------------------------------------------------
 gs_nk <- 2; 
-ss_ns <- 20
+ss_ns <- 50
 ss <- lapply(seq_len(4), function(i) {
     ss <- rep(1, ss_ns) / seq(1, i, length = ss_ns)
     ss / sum(ss)
@@ -36,7 +36,7 @@ for (i in seq_along(ss)) {
 
 # unbalanced group sizes # -------------------------------------------------------
 gs_nk <- 2; 
-gs_ns <- 20; 
+gs_ns <- 50; 
 gs_nc <- 200
 gs <- list(c(0.5, 0.5), c(0.45, 0.55), c(0.4, 0.6), c(0.3, 0.7))
 cs <- sapply(gs, function(u) ceiling(gs_nc*gs_nk*gs_ns/u[1]))
