@@ -2,7 +2,7 @@ config <- yaml::read_yaml("config.yaml")
 
 de10 <- c(0.9, 0, 0.1, 0, 0, 0)
 
-nr = 3
+nr = 10
 
 sim_pars <- list(
     # null simulations
