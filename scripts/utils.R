@@ -4,21 +4,21 @@
 .cat_cols <- c("royalblue", "cornflowerblue", "red3", "tomato", "orange", "gold")
 names(.cat_cols) <- c("ee", "ep", "de", "dp", "dm", "db")
 
-.meth_cols <- c(
+.meth_cols <- rev(c(
     # "dreamlet_delta.sum.counts" = "#E41A1C",
     # "dreamlet_ncells.sum.counts" = "#f76b5c",
     # "dreamlet_none.sum.counts" = "#FFEA00",
     "dreamlet_none.sum.counts" = "#E41A1C",
 
+    "DESeq2.sum.counts" = "#984EA3",
     "limma-voom.sum.counts" = "#377EB8",
     "limma-trend.mean.logcounts"    = "#95bcdb",
     "limma-trend.mean.vstresiduals" = "#cfeaff",
 
-    "DESeq2.sum.counts" = "#984EA3",
     "edgeR.sum.counts" = "#4DAF4A",
     "edgeR.sum.scalecpm" = "#9cf099",
     "MAST.logcounts"    = "#ed68b8"    
-    )
+    ))
 
 #cols <- .meth_cols
 #hist(seq_along(cols), breaks = c(seq_along(cols) - 0.5, length(cols) + 0.5), col = cols)

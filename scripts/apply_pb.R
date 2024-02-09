@@ -23,8 +23,8 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             pb <- aggregateToPseudoBulk(sce, a, cluster_id = "cluster_id", sample_id = "sample_id")#, fun = pars$fun, scale = pars$scale)
 
-            form = ~ group_id
-            
+            form = ~ group_id 
+
             # filtering done before, for consistency
             vobj <- processAssays(pb, 
                         form,
@@ -34,6 +34,10 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                         min.prop = 0,
                         min.total.count = 1)
 
+            # form = ~ (1|group_id) + (1|SubID)
+            # df_vp = fitVarPart(vobj, form, BPPARAM=SnowParam(6))
+
+            form = ~ group_id + (1|SubID)
             fit <- dreamlet(vobj, form)
             tab <- topTable(fit, coef='group_idB', number=Inf, sort.by="none")
 
