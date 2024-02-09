@@ -68,7 +68,7 @@ assignInNamespace(".nb", .nb.replace, ns="muscat")
 
 
 sim <- simData(sce, 
-    paired = FALSE, lfc = .5 ,
+    paired = TRUE, lfc = .5 ,
     force = TRUE,
     ng = nrow(sce), nc = sim_pars$nc * k_scaling,
     ns = sim_pars$ns, nk = sim_pars$nk,
