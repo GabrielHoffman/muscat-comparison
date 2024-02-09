@@ -74,6 +74,8 @@ sim <- simData(sce,
     ns = sim_pars$ns, nk = sim_pars$nk,
     p_dd = sim_pars$p_dd, probs = sim_pars$probs)
 
+sim$SubID = gsub("\\..*", "", sim$sample_id)
+
 # filter genes
 sim <- sim[rowSums(counts(sim) > 0) >= 10, ]
 

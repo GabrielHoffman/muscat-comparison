@@ -23,11 +23,9 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             pb <- aggregateToPseudoBulk(sce, a, cluster_id = "cluster_id", sample_id = "sample_id")#, fun = pars$fun, scale = pars$scale)
 
-            form = ~ group_id 
-
             # filtering done before, for consistency
             vobj <- processAssays(pb, 
-                        form,
+                        ~ group_id 
                         min.cells = 1,
                         min.count = 0,
                         min.samples = 0,
