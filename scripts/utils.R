@@ -5,9 +5,10 @@
 names(.cat_cols) <- c("ee", "ep", "de", "dp", "dm", "db")
 
 .meth_cols <- c(
-    "dreamlet_delta.sum.counts" = "#E41A1C",
-    "dreamlet_ncells.sum.counts" = "#f76b5c",
-    "dreamlet_none.sum.counts" = "#FFEA00",
+    # "dreamlet_delta.sum.counts" = "#E41A1C",
+    # "dreamlet_ncells.sum.counts" = "#f76b5c",
+    # "dreamlet_none.sum.counts" = "#FFEA00",
+    "dreamlet_none.sum.counts" = "#E41A1C",
 
     "limma-voom.sum.counts" = "#377EB8",
     "limma-trend.mean.logcounts"    = "#95bcdb",

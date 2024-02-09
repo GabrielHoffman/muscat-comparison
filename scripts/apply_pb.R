@@ -23,26 +23,18 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 
             pb <- aggregateToPseudoBulk(sce, a, cluster_id = "cluster_id", sample_id = "sample_id")#, fun = pars$fun, scale = pars$scale)
 
-            # Gene expressed genes for each cell type
-            geneList = getExprGeneNames(pb,
+            form = ~ group_id
+            
+            # filtering done before, for consistency
+            vobj <- processAssays(pb, 
+                        form,
                         min.cells = 1,
                         min.count = 0,
                         min.samples = 0,
                         min.prop = 0,
                         min.total.count = 1)
 
-            W.list = get_weights(sce, pars, geneList)
-
-            vobj <- processAssays(pb, ~ group_id,
-                        min.cells = 1,
-                        min.count = 0,
-                        min.samples = 0,
-                        min.prop = 0,
-                        min.total.count = 1,
-                        # span = 0.5,
-                        weightsList = W.list)
-
-            fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
+            fit <- dreamlet(vobj, form)
             tab <- topTable(fit, coef='group_idB', number=Inf, sort.by="none")
 
             tab2 = with(tab, data.frame(gene = ID, cluster_id = assay, logFC, AveExpr, t, p_val=P.Value, B, contrast='B'))
@@ -85,27 +77,37 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
 }
 
 
-get_weights = function(sce, pars, geneList){
-     # Precision weights
-    pc = 0.5
-    W.list <- switch(pars$method, 
-            "dreamlet_delta" = pbWeights( sce, 
-                            sample_id = "sample_id", 
-                            cluster_id = "cluster_id", 
-                            method = "delta", 
-                            geneList = geneList,
-                            prior.count = pc,
-                            maxRatio = 5), 
-            "dreamlet_ncells" = pbWeights( sce, 
-                            sample_id = "sample_id", 
-                            cluster_id = "cluster_id", 
-                            method = "ncells", 
-                            geneList = geneList), 
-            "dreamlet_none" = {w = pbWeights( sce, 
-                            sample_id = "sample_id", 
-                            cluster_id = "cluster_id", 
-                            method = "ncells", 
-                            geneList = geneList);
-                lapply(w, function(x){x[] = 1; x})})
-    W.list
-}
+# Gene expressed genes for each cell type
+# geneList = getExprGeneNames(pb,
+#             min.cells = 1,
+#             min.count = 0,
+#             min.samples = 0,
+#             min.prop = 0,
+#             min.total.count = 1)
+
+# W.list = get_weights(sce, pars, geneList)
+
+# get_weights = function(sce, pars, geneList){
+#      # Precision weights
+#     pc = 0.5
+#     W.list <- switch(pars$method, 
+#             "dreamlet_delta" = pbWeights( sce, 
+#                             sample_id = "sample_id", 
+#                             cluster_id = "cluster_id", 
+#                             method = "delta", 
+#                             geneList = geneList,
+#                             prior.count = pc,
+#                             maxRatio = 5), 
+#             "dreamlet_ncells" = pbWeights( sce, 
+#                             sample_id = "sample_id", 
+#                             cluster_id = "cluster_id", 
+#                             method = "ncells", 
+#                             geneList = geneList), 
+#             "dreamlet_none" = {w = pbWeights( sce, 
+#                             sample_id = "sample_id", 
+#                             cluster_id = "cluster_id", 
+#                             method = "ncells", 
+#                             geneList = geneList);
+#                 lapply(w, function(x){x[] = 1; x})})
+#     W.list
+# }
