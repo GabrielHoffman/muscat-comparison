@@ -77,7 +77,8 @@ sim <- simData(sce,
 sim$SubID = gsub("\\..*", "", sim$sample_id)
 
 # filter genes
-sim <- sim[rowSums(counts(sim) > 0) >= 10, ]
+# sim <- sim[rowSums(counts(sim) > 0) >= 10, ]
+sim <- sim[rowSums(counts(sim) > 0) >= .01*ncol(sim), ]
 
 tab = table(sim$sample_id, sim$cluster_id)
 
