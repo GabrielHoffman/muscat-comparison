@@ -32,8 +32,8 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                         min.prop = 0,
                         min.total.count = 1)
 
-            # form = ~ group_id + (1|SubID)
-            form = ~ group_id 
+            form = ~ group_id + (1|SubID)
+            # form = ~ group_id 
             fit <- dreamlet(vobj, form)
             tab <- topTable(fit, coef='group_idB', number=Inf, sort.by="none")
 
