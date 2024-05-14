@@ -59,7 +59,7 @@ rule all:
 			#expand(config["raw_data"], "sce_{did}.rds"), did = config["dids"]),
 			#expand(config["raw_data"], "ref_{did}.rds"), did = config["dids"]),
 		# 'countsimQC' reports
-			expand(config["plots"] + "{did}-sim_qc.html", did = config["dids"]),
+			# expand(config["plots"] + "{did}-sim_qc.html", did = config["dids"]),
 		# pseudobulk-level mean-dispersion plots
 			expand(config["plots"] + "{did}-pb_mean_disp.pdf", did = config["dids"]),
 			expand(config["plots"] + "{did}-upset.pdf", did = config["dids"]),
@@ -111,14 +111,14 @@ rule prep_sim:
 		"--args input_sce={input.sce} output_sce={output.sce}"\
 		{input.script} {log}'''
 
-rule sim_qc:
-	priority: 98
-	input:	script = config["scripts"] + "sim_qc.R",
-			sce = config["raw_data"] + "ref_{did}.rds"
-	output: config["plots"] + "{did}-sim_qc.html"
-	log:	config["logs"] + "sim_qc-{did}.Rout"
-	shell:	'''{R} CMD BATCH --no-restore --no-save\
-		"--args sce={input.sce} html={output}" {input.script} {log}'''
+# rule sim_qc:
+# 	priority: 98
+# 	input:	script = config["scripts"] + "sim_qc.R",
+# 			sce = config["raw_data"] + "ref_{did}.rds"
+# 	output: config["plots"] + "{did}-sim_qc.html"
+# 	log:	config["logs"] + "sim_qc-{did}.Rout"
+# 	shell:	'''{R} CMD BATCH --no-restore --no-save\
+# 		"--args sce={input.sce} html={output}" {input.script} {log}'''
 
 rule sim_data:
 	priority: 98
@@ -148,17 +148,17 @@ rule run_meth:
 		{input.script} {log}'''
 
 # pseudobulk-level mean-dispersion scatters
-rule plot_pb_mean_disp:
-	priority: 50
-	input:	config["utils"],
-			script = config["scripts"] + "plot_pb_mean_disp.R",
-			sce = config["raw_data"] + "ref_{did}.rds",
-	output: ggp = config["plots"] + "{did}-pb_mean_disp.rds",
-			fig = config["plots"] + "{did}-pb_mean_disp.pdf"
-	log:	config["logs"] + "plot_pb_mean_disp-{did}.Rout"
-	shell:	'''{R} CMD BATCH --no-restore --no-save\
-		"--args sce={input.sce} ggp={output.ggp} fig={output.fig}"\
-		{input.script} {log}'''
+# rule plot_pb_mean_disp:
+# 	priority: 50
+# 	input:	config["utils"],
+# 			script = config["scripts"] + "plot_pb_mean_disp.R",
+# 			sce = config["raw_data"] + "ref_{did}.rds",
+# 	output: ggp = config["plots"] + "{did}-pb_mean_disp.rds",
+# 			fig = config["plots"] + "{did}-pb_mean_disp.pdf"
+# 	log:	config["logs"] + "plot_pb_mean_disp-{did}.Rout"
+# 	shell:	'''{R} CMD BATCH --no-restore --no-save\
+# 		"--args sce={input.sce} ggp={output.ggp} fig={output.fig}"\
+# 		{input.script} {log}'''
 
 # null simulation p-value distributions
 rule plot_null:
