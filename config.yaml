@@ -3,7 +3,7 @@ R: "R_LIBS_USER=~/libs/bioc310/ /usr/local/R/R-3.6.2/bin/R"
 scripts: "scripts/"
 utils: "scripts/utils.R"
 
-dids: ["kang", "magl"]
+dids: ["kang"]
 sids: "meta/sim_ids.json"
 mids: "meta/meth_ids.csv"
 
