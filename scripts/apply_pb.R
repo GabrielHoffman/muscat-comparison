@@ -57,7 +57,7 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                     list(pb = pb, filter = "none", verbose = FALSE),
                     pars[names(pars) %in% names(formals(pbDS))])),
                 error = function(e) e)
-            if (!inherits(res, "error"))
+            if (!inherits(res, "error")){
                 res <- dplyr::bind_rows(res$table[[1]])
             }
             res
