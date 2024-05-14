@@ -1,5 +1,6 @@
 # this determines which types of methods to include
-names(ids) <- ids <- c("pb", "ad", "scdd", "mast", "mm")
+# names(ids) <- ids <- c("pb", "ad", "scdd", "mast", "mm")
+names(ids) <- ids <- c("pb", "mast")
 
 # aggregation-based ------------------------------------------------------------
 pb <- dplyr::bind_rows(
@@ -26,26 +27,26 @@ pb$id <- with(pb, sprintf("%s%s.%s.%s%s",
     fun, ifelse(scale, "scale", ""), assay))
 
 # mixed-models -----------------------------------------------------------------
-mm <- data.frame(
-    stringsAsFactors = FALSE,
-    method = c("dream", "dream2", "nbinom", "vst"),
-    vst = c("", "", "", "sctransform"),
-    ddf = "Satterthwaite")
-mm$id <- with(mm, paste0("MM-", method))
+# mm <- data.frame(
+#     stringsAsFactors = FALSE,
+#     method = c("dream", "dream2", "nbinom", "vst"),
+#     vst = c("", "", "", "sctransform"),
+#     ddf = "Satterthwaite")
+# mm$id <- with(mm, paste0("MM-", method))
 
 # Anderson-Darling -------------------------------------------------------------
-ad <-  expand.grid(
-    KEEP.OUT.ATTRS = FALSE,
-    stringsAsFactors = FALSE,
-    assay = c("logcounts", "vstresiduals"),
-    var = c("sample_id", "group_id"))
-ad$id <- with(ad, sprintf("AD-%s.%s", gsub("(.).*", "\\1id", var), assay))
+# ad <-  expand.grid(
+#     KEEP.OUT.ATTRS = FALSE,
+#     stringsAsFactors = FALSE,
+#     assay = c("logcounts", "vstresiduals"),
+#     var = c("sample_id", "group_id"))
+# ad$id <- with(ad, sprintf("AD-%s.%s", gsub("(.).*", "\\1id", var), assay))
 
 # scDD -------------------------------------------------------------------------
-scdd <- data.frame(
-    stringsAsFactors = FALSE,
-    assay = c("logcounts", "vstresiduals"))
-scdd$id <- with(scdd, sprintf("scDD.%s", assay))
+# scdd <- data.frame(
+#     stringsAsFactors = FALSE,
+#     assay = c("logcounts", "vstresiduals"))
+# scdd$id <- with(scdd, sprintf("scDD.%s", assay))
 
 # MAST -------------------------------------------------------------------------
 mast <- data.frame(
