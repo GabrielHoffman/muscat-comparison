@@ -4,28 +4,45 @@
 .cat_cols <- c("royalblue", "cornflowerblue", "red3", "tomato", "orange", "gold")
 names(.cat_cols) <- c("ee", "ep", "de", "dp", "dm", "db")
 
-.meth_cols <- c(
-    "edgeR.sum.counts" = "#000000",
-    "edgeR.sum.scalecpm" = "#C6C6C6",
+# .meth_cols <- c(
+#     "edgeR.sum.counts" = "#000000",
+#     "edgeR.sum.scalecpm" = "#C6C6C6",
     
-    "scDD.logcounts"    = "#0056B2",
-    "scDD.vstresiduals" = "#009EF6", 
+#     # "scDD.logcounts"    = "#0056B2",
+#     # "scDD.vstresiduals" = "#009EF6", 
     
-    "limma-voom.sum.counts" = "#009262",
-    "limma-trend.mean.logcounts"    = "#45BF55",
-    "limma-trend.mean.vstresiduals" = "#B5E655",
+#     "limma-voom.sum.counts" = "#009262",
+#     "limma-trend.mean.logcounts"    = "#45BF55",
+#     "limma-trend.mean.vstresiduals" = "#B5E655",
     
-    "MAST.logcounts"    = "#FFC300",
+#     "MAST.logcounts"    = "#FFC300",
     
-    "MM-dream"  = "#005E5C",
-    "MM-dream2" = "#00ABA6",
-    "MM-nbinom" = "#00E3DD",
-    "MM-vst"    = "#95EEE8",
+#     # "MM-dream"  = "#005E5C",
+#     # "MM-dream2" = "#00ABA6",
+#     # "MM-nbinom" = "#00E3DD",
+#     # "MM-vst"    = "#95EEE8",
     
-    "AD-gid.logcounts"    = "#9A41B3",
-    "AD-gid.vstresiduals" = "#FFA9FF",
-    "AD-sid.logcounts"    = "#E56D4B",
-    "AD-sid.vstresiduals" = "#FBB6A2")
+#     # "AD-gid.logcounts"    = "#9A41B3",
+#     # "AD-gid.vstresiduals" = "#FFA9FF",
+#     # "AD-sid.logcounts"    = "#E56D4B",
+#     # "AD-sid.vstresiduals" = "#FBB6A2"
+#     )
+
+
+.meth_cols <- rev(c(    
+    "dreamlet_weighted.sum.counts" = "#E41A1C",
+    "dreamlet_none.sum.counts" = "#d1696a",
+
+    "limma-voom.sum.counts" = "#377EB8",
+    "limma-trend.mean.logcounts"    = "#95bcdb",
+    "limma-trend.mean.vstresiduals" = "#cfeaff",
+
+    "DESeq2.sum.counts" = "#984EA3",    
+
+    "edgeR.sum.counts" = "#4DAF4A",
+    "edgeR.sum.scalecpm" = "#9cf099",    
+    
+    "MAST.logcounts"    = "#ed68b8"))
 
 #cols <- .meth_cols
 #hist(seq_along(cols), breaks = c(seq_along(cols) - 0.5, length(cols) + 0.5), col = cols)
