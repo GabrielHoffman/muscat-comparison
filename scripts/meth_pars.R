@@ -1,6 +1,7 @@
 # this determines which types of methods to include
 # names(ids) <- ids <- c("pb", "ad", "scdd", "mast", "mm")
-names(ids) <- ids <- c("pb", "mast")
+# names(ids) <- ids <- c("pb", "mast")
+names(ids) <- ids <- c("pb")
 
 # aggregation-based ------------------------------------------------------------
 pb <- dplyr::bind_rows(
@@ -54,10 +55,10 @@ pb$id <- with(pb, sprintf("%s%s.%s.%s%s",
 # scdd$id <- with(scdd, sprintf("scDD.%s", assay))
 
 # MAST -------------------------------------------------------------------------
-mast <- data.frame(
-    stringsAsFactors = FALSE,
-    assay = "logcounts",
-    id = "MAST.logcounts")
+# mast <- data.frame(
+#     stringsAsFactors = FALSE,
+#     assay = "logcounts",
+#     id = "MAST.logcounts")
 
 # write method IDs to .csv -----------------------------------------------------
 for (id in ids) {
