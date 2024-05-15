@@ -55,7 +55,7 @@ keep = sapply( seq(nrow(df_grid)), function(i){
 })
 keep = sort(unlist(keep))
 
-sim = sim[,keep]
+# sim = sim[,keep]
 #--------------------------------
 
 # filter after
