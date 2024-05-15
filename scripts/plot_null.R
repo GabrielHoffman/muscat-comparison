@@ -30,7 +30,7 @@ p <- ggplot(df, aes(x = p_val, y = ..ndensity..,
             override.aes = list(alpha = 1, col = NA))) +
     scale_x_continuous("p-value", breaks = seq(0, 1, 0.2), expand = c(0, 0.05)) +
     scale_y_continuous("normalized density", breaks = c(0, 1), expand = c(0, 0.1)) +
-    .prettify("bw") + theme(aspect.ratio = 1/2,
+    .prettify("bw") + theme(aspect.ratio = 1,
         #legend.position = "bottom",
         legend.box.just = "left",
         panel.grid = element_blank(),
