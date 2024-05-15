@@ -31,11 +31,11 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                     priorWeightsAsCounts = priorWeightsAsCounts, 
                     prior.count.for.weights = .5,
                     rescaleWeightsAfter = FALSE,
-                    min.cells = 2,
-                    min.count = 1,
+                    min.cells = 1,
+                    min.count = 0,
                     min.samples = 4,
-                    min.total.count = 10,
-                    min.prop = 0.1)
+                    min.total.count = 0,
+                    min.prop = 0)
             fit <- dreamlet(vobj, ~ group_id, verbose=FALSE )
             tab <- topTable(fit, coef='group_idB', number=Inf, sort.by="none")
 
