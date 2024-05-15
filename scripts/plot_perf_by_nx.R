@@ -83,7 +83,7 @@ library(tidyverse)
 library(parallel)
 
 thresholds = c(1e-18, 1e-15, 1e-12, 1e-10, 1e-8, 1e-6, 1e-4, 1e-3)
-thresholds = sort(c(thresholds, seq(5e-3, 1, length.out=100)))
+thresholds = sort(c(thresholds, seq(5e-3, 1, length.out=500)))
 
 perf2 <- mclapply(cd, calculate_performance, 
     aspects = "fdrtpr", binary_truth = "is_de", 
