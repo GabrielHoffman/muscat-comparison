@@ -13,6 +13,8 @@ sce <- readRDS(args$sce)
 sim_pars <- fromJSON(args$sim_pars)
 set.seed(sim_pars$seed + as.numeric(wcs$i))
 
+
+#--------------------------------
 # Remove check on lfc
 assignInNamespace( ".check_args_simData", function(u)
     return(list(nk = u$nk, ns = u$ns)), ns="muscat")
@@ -40,6 +42,7 @@ alpha = exp(runif(nrow(tab), 0, 3))
 prob = gtools::rdirichlet(1, alpha = alpha)
 counts2 = rmultinom(1, sim_pars$nc / sim_pars$nk, prob)
 
+# Subsample cells
 df_grid = expand.grid(sid = levels(sim$sample_id), 
                         cid = levels(sim$cluster_id))
 df_grid$counts = c(counts1, counts2)
@@ -52,7 +55,8 @@ keep = sapply( seq(nrow(df_grid)), function(i){
 })
 keep = sort(unlist(keep))
 
-sim2 = sim[,keep]
+sim = sim[,keep]
+#--------------------------------
 
 # filter after
 sim <- sim[rowSums(counts(sim) > 0) >= 10, ]
