@@ -51,7 +51,7 @@ keep = sapply( seq(nrow(df_grid)), function(i){
 
     keep = which( sim$sample_id == df_grid$sid[i] & sim$cluster_id == df_grid$cid[i])
 
-    unique(sample(keep, df_grid$counts[i], replace=TRUE))
+    sample(keep, min(length(keep), df_grid$counts[i]))
 })
 keep = sort(unlist(keep))
 
