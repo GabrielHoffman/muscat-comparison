@@ -30,9 +30,29 @@ if (wcs$g != "x")
     gs <- sample(gs, min(nrow(sim), as.numeric(wcs$g)))
 
 if (wcs$c != "x") {
+    # table of cells for each sample
+    tab = with(colData(sim), table(sample_id, cluster_id))
+    tab = as.data.frame(tab)
+    rownames(tab) = with(tab, paste(cluster_id, sample_id, sep='.'))
+
+    # target mean number of cells
+    ncells.target = as.numeric(wcs$c)
+    nsubj = length(unique(tab$sample_id))
+
     cs <- split(cs, list(sim$cluster_id, sim$sample_id))
-    cs <- unlist(lapply(cs, function(u) 
-        sample(u, min(length(u), as.numeric(wcs$c)))))
+    cs <- unlist(lapply(names(cs), function(id){ 
+        u = cs[[id]]
+
+        # total cells in this cluster
+        ntotal = sum(tab[tab$cluster_id == tab[id,'cluster_id'],]$Freq)
+        # mean number of observed cells per sample in this cluster
+        ncells.mean = ntotal / nsubj
+
+        # target size scaled by the fraction of total cells in this subject
+        ncells = ncells.target * length(u) / ncells.mean
+
+        sample(u, min(length(u), ncells))
+    }))
 }
 
 # run method & write results to .rds
