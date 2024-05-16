@@ -6,7 +6,7 @@ suppressMessages({
     library(purrr)
 })
 
-# wcs = list(x = "c", did = "magl")
+# wcs = list(x = "s", did = "kang")
 # args <- list(
 #     res = list.files("results", sprintf("%s,de10_n%s,", wcs$did, wcs$x), full.names = TRUE),
 #     ggp = file.path("plots", paste0(wcs$did, sprintf("-perf_by_n%s.rds", wcs$x))),
