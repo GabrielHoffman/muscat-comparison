@@ -12,7 +12,7 @@ sim_pars <- list(
     db10 = list(nr = 5, p_dd = c(0.9, 0, 0, 0, 0, 0.1), seed = 70),
     # increasing number of genes, cells, replicates
     # de10_ng = list(nr = 5, nk = 2, ns = 3, seed = 80, nc = 2*2*3*100),
-    de10_nc = list(nr = 5, nk = 2, ns = 50, seed = 90, nc = 2*2*3*500),
+    de10_nc = list(nr = 5, nk = 2, ns = 50, seed = 90, nc = 80000),
     de10_ns = list(nr = 5, nk = 2, ns = 100, seed = 110)
 )
 
