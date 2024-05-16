@@ -25,7 +25,7 @@ k_scaling = 5
 
 # sim data
 sim <- simData(sce, 
-    paired = FALSE, lfc = 0.5,
+    paired = FALSE, lfc = 0.4,
     ng = nrow(sce), nc = k_scaling*sim_pars$nc,
     ns = sim_pars$ns, nk = sim_pars$nk,
     p_dd = sim_pars$p_dd, probs = sim_pars$probs, force=TRUE)
