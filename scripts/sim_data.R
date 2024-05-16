@@ -34,11 +34,11 @@ sim <- simData(sce,
 tab = table(sim$sample_id, sim$cluster_id)
 
 # get the number of cells to sample
-alpha = exp(runif(nrow(tab), 2, 4))
+alpha = exp(runif(nrow(tab), 1.5, 4))
 prob = gtools::rdirichlet(1, alpha = alpha)
 counts1 = rmultinom(1, sim_pars$nc / sim_pars$nk, prob)
 
-alpha = exp(runif(nrow(tab), 2, 4))
+alpha = exp(runif(nrow(tab), 1.5, 4))
 prob = gtools::rdirichlet(1, alpha = alpha)
 counts2 = rmultinom(1, sim_pars$nc / sim_pars$nk, prob)
 
