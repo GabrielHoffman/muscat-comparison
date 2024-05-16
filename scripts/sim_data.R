@@ -25,7 +25,7 @@ k_scaling = 5
 
 # sim data
 sim <- simData(sce, 
-    paired = FALSE, lfc = 0.4,
+    paired = FALSE, lfc = 0.25,
     ng = nrow(sce), nc = k_scaling*sim_pars$nc,
     ns = sim_pars$ns, nk = sim_pars$nk,
     p_dd = sim_pars$p_dd, probs = sim_pars$probs, force=TRUE)
@@ -34,11 +34,11 @@ sim <- simData(sce,
 tab = table(sim$sample_id, sim$cluster_id)
 
 # get the number of cells to sample
-alpha = exp(runif(nrow(tab), 1.5, 4))
+alpha = exp(runif(nrow(tab), 1, 4))
 prob = gtools::rdirichlet(1, alpha = alpha)
 counts1 = rmultinom(1, sim_pars$nc / sim_pars$nk, prob)
 
-alpha = exp(runif(nrow(tab), 1.5, 4))
+alpha = exp(runif(nrow(tab), 1, 4))
 prob = gtools::rdirichlet(1, alpha = alpha)
 counts2 = rmultinom(1, sim_pars$nc / sim_pars$nk, prob)
 

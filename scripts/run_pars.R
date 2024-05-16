@@ -7,7 +7,7 @@ run_pars <- list(
     kang = list(
         de10_ng = list(nr = 1, ng = c(4e3)),
         de10_nc = list(nr = 1, nc = c(50, 100, 400)),
-        de10_ns = list(nr = 1, ns = c(10, 20, 30))
+        de10_ns = list(nr = 1, ns = c(25, 50, 75))
     )
 )
 
