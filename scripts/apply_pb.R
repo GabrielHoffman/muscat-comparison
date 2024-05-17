@@ -30,7 +30,6 @@ apply_pb <- function(sce, pars, ds_only = TRUE) {
                     verbose=FALSE, 
                     priorWeightsAsCounts = priorWeightsAsCounts, 
                     prior.count.for.weights = FALSE,
-                    rescaleWeightsAfter = TRUE,
                     min.cells = 1,
                     min.count = 0,
                     min.samples = 0,
